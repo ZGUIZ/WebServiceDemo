@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://impl.service.zguiz.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://impl.service.zguiz.com" xmlns:intf="http://impl.service.zguiz.com" xmlns:tns1="http://bean.zguiz.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://impl.service.zguiz.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://bean.zguiz.com"/>
+   <element name="account" type="xsd:string"/>
+   <element name="password" type="xsd:string"/>
+   <element name="loginReturn" type="tns1:User"/>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://bean.zguiz.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="User">
+    <sequence>
+     <element name="account" nillable="true" type="xsd:string"/>
+     <element name="admin" type="xsd:boolean"/>
+     <element name="age" type="xsd:int"/>
+     <element name="birthday" nillable="true" type="xsd:dateTime"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part element="impl:loginReturn" name="loginReturn"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part element="impl:account" name="account"/>
+
+      <wsdl:part element="impl:password" name="password"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="UserServiceImpl">
+
+      <wsdl:operation name="login" parameterOrder="account password">
+
+         <wsdl:input message="impl:loginRequest" name="loginRequest"/>
+
+         <wsdl:output message="impl:loginResponse" name="loginResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="UserServiceImplSoapBinding" type="impl:UserServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="login">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="loginRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="UserServiceImplService">
+
+      <wsdl:port binding="impl:UserServiceImplSoapBinding" name="UserServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080//services/UserServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
