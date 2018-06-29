@@ -45,6 +45,7 @@
     <parameter name="allowedMethods" value="*"/>
     <parameter name="scope" value="Application"/>
     <namespace>http://com/zguiz/service/impl</namespace>
+    <beanMapping languageSpecificType="java:com.zguiz.bean.User" qname="ns1:User" xmlns:ns1="urn:UserServiceImpl"></beanMapping>
   </service>
   <service name="UserService" provider="java:RPC" style="document" use="literal">
     <parameter name="className" value="example.UserService"/>
